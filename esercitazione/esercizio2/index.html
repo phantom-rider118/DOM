@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .red {
+        color: red;
+        font-weight: bold;
+        font-size: large;
+      }
+      .blue {
+        color: blue;
+      }
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>testo che cambia colore e bottone che cambia istruzione</h1>
+    <div>
+      <button class="btn">Cambia colore</button>
+    </div>
+    <p id="text">Questo testo cambierà il colore in 3 modi</p>
+    <script>
+      const button = document.querySelector(".btn");
+      const text = document.getElementById("text");
+      const colors = ["red", "blue", "green"];
+      let colorIndex = 0;
+
+      button.addEventListener("click", () => {
+        text.classList.remove(colors[colorIndex]);
+        colorIndex = (colorIndex + 1) % colors.length;
+
+        text.classList.add(colors[colorIndex]);
+
+        button.textContent =
+          button.textContent === "Cambia colore"
+            ? "Ripristina Colore"
+            : "Cambia Colore";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .styled-text {
+        font-weight: bold;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>testo in grazzetto e corsivo</h1>
+    <div>
+      <button class="btn">Cambia stile testo</button>
+    </div>
+    <p id="text">Questo testo cambierà stile al clic</p>
+    <script>
+        const button = document.querySelector(".btn")
+        const p = document.getElementById("text")
+
+        button.addEventListener("click", ()=>{
+            p.classList.toggle("styled-text")
+        })
+    </script>
+  </body>
+</html>
