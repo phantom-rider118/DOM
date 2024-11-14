@@ -1,0 +1,26 @@
+Traccia esercizio
+Crea uno script che:
+
+Al clic del bottone si inserisce la modalità dark
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .theme {
+        background-color: black;
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Dark Mode</h1>
+    <div>
+      <button class="btn">Dark Mode</button>
+    </div>
+    <script></script>
+  </body>
+</html>
