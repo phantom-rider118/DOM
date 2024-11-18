@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .conteiner-form{
+        display: flex;
+        flex-direction: column;
+        background-color: blanchedalmond;
+        justify-content: center; 
+        align-items: center;
+        height: 100vh;
+
+      }
+      #form-registrazione {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        
+        max-width: 300px;
+      } -->
+    </style>
+  </head>
+  <body>
+    <div class="conteiner-form">
+      <form action="" id="form-registrazione">
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Inserisci il nome"
+          required
+        />
+        <input
+          type="text"
+          id="cognome"
+          name="cognome"
+          placeholder="Inserisci il cognome"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Inserisci l'email"
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Inserisci la password"
+          required
+        />
+        <button type="submit">Invia</button>
+      </form>
+      <form action="" id=" form-login">
+        <input
+          type="email"
+          id="email-login"
+          placeholder="prova@gmail.com"
+          required
+        />
+        <input
+          type="password"
+          id="password-login"
+          placeholder="inserisci password"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <script>
+      function registrazione() {
+        const nome = document.getElementById("nome");
+        const cognome = document.getElementById("cognome");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+
+        const nomeValue = nome.value;
+        localStorage.setItem("nome", nomeValue);
+
+        const cognomeValue = cognome.value;
+        localStorage.setItem("cognome", cognomeValue);
+
+        const emailValue = email.value;
+        localStorage.setItem("email", emailValue);
+
+        const passwordValue = password.value;
+        localStorage.setItem("password", passwordValue);
+
+        nome.value = "";
+        cognome.value = "";
+        email.value = "";
+        password.value = "";
+      }
+
+      const formRegistrazione = document.getElementById("form-registrazione");
+      formRegistrazione.addEventListener("submit", (event) => {
+        event.preventDefault();
+        registrazione();
+      });
+
+      function login() {
+        const emailLogin = document.getElementById("email-login");
+        const passwordLogin = document.getElementById("password-login");
+
+        const emailLoginValue = emailLogin.value;
+        const passwordLoginValue = passwordLogin.value;
+
+        const savedEmail = localStorage.getItem("email");
+        const savedPassword = localStorage.getItem("password");
+
+        if (
+          savedEmail === emailLoginValue &&
+          savedPassword === passwordLoginValue
+        ) {
+          alert("Login avvenuto con successo");
+        } else {
+          alert("Login fallito");
+        }
+      }
+      const formLogin = document.getElementById("form-login");
+      formLogin.addEventListener("submit", (event) => {
+        event.preventDefault();
+        login();
+      });
+    </script>
+  </body>
+</html>
