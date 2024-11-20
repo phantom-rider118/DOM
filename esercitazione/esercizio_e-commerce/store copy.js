@@ -1,3 +1,8 @@
+const griglia = document.getElementById("contenitore-prodotti");
+const select = document.getElementById("contenitore-categorie");
+const prezzoMinimo = document.getElementById("prezzo-minimo");
+const prezzoMassimo = document.getElementById("prezzo-massimo");
+
 async function prodotti(url) {
   try {
     const response = await fetch(url);
@@ -10,8 +15,6 @@ async function prodotti(url) {
     const data = await response.json();
 
     // Trova gli elementi del DOM
-    const griglia = document.getElementById("contenitore-prodotti");
-    const select = document.getElementById("contenitore-categorie");
 
     // Controlla se gli elementi sono stati trovati
     if (!griglia) {
@@ -24,12 +27,12 @@ async function prodotti(url) {
     }
 
     const categoria = [];
-    
+
     //opzione all
-    const optionAll = document.createElement("option")
-    optionAll.value = "all"
-    optionAll.innerText = "All"
-    select.appendChild(optionAll)
+    const optionAll = document.createElement("option");
+    optionAll.value = "all";
+    optionAll.innerText = "All";
+    select.appendChild(optionAll);
 
     // Popola la select e aggiungi tutte le opzioni uniche
     data.forEach((element) => {
@@ -48,19 +51,12 @@ async function prodotti(url) {
 
     // Aggiungi l'evento per filtrare le categorie
     //si attiva quando l'utente cambia l'opzione selezionata del menu
-    select.addEventListener("change", () => {
-      const categoriaSelezionata = select.value; // Ottieni la categoria selezionata
-      if (categoriaSelezionata === "all") {
-        // Mostra tutti i prodotti
-        mostraProdotti(data, griglia);
-      } else {
-        // Filtra e mostra solo i prodotti della categoria selezionata
-        const prodottiFiltrati = data.filter(
-          (item) => item.category === categoriaSelezionata
-        );
-        mostraProdotti(prodottiFiltrati, griglia);
-      }
-    });
+    select.addEventListener("change", () => filtra(data));
+    
+    prezzoMinimo.addEventListener("input", () => filtra(data));
+    
+    prezzoMassimo.addEventListener("input", () => filtra(data));
+
   } catch (error) {
     console.error(error);
   }
@@ -70,6 +66,26 @@ async function prodotti(url) {
 function mostraProdotti(prodotti, griglia) {
   griglia.innerHTML = ""; // Svuota la griglia prima di aggiungere nuovi elementi
   prodotti.forEach((prodotto) => {
+    const card = creaCard(prodotto);
+    griglia.appendChild(card);
+  });
+}
+
+function filtra(prodotti) {
+  griglia.innerHTML = "";
+  const minimoValue = prezzoMinimo.value;
+  const massimoValue = prezzoMassimo.value;
+  const categoriaSelezionata = select.value;
+  const datiFiltrati = prodotti.filter((prodotto) => {
+    const filtroCategoria =
+      categoriaSelezionata === "all" ||
+      prodotto.category === categoriaSelezionata;
+    const filtroPrezzo =
+      prodotto.price >= minimoValue && prodotto.price <= massimoValue;
+
+    return filtroCategoria && filtroPrezzo;
+  });
+  datiFiltrati.forEach((prodotto) => {
     const card = creaCard(prodotto);
     griglia.appendChild(card);
   });
