@@ -47,6 +47,7 @@ async function prodotti(url) {
     mostraProdotti(data, griglia);
 
     // Aggiungi l'evento per filtrare le categorie
+    //si attiva quando l'utente cambia l'opzione selezionata del menu
     select.addEventListener("change", () => {
       const categoriaSelezionata = select.value; // Ottieni la categoria selezionata
       if (categoriaSelezionata === "all") {
